@@ -152,7 +152,6 @@ private:
                      input[i] == 's' || input[i] == 'c' || input[i] == 'a') {
                 if (!stack1->empty() && getPriority(input[i]) <= getPriority(stack1->top())) {
                     while (!stack1->empty() && getPriority(input[i]) <= getPriority(stack1->top())) {
-                        cout << "kek" << endl;
                         combo.push_back(0);
                         chars.push_back(stack1->top());
                         stack1->pop();
