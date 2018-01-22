@@ -6,8 +6,6 @@
 
 using namespace std;
 
-string getInput();
-
 
 class Calc {
     vector<double> nums;
@@ -211,18 +209,6 @@ private:
     }
 };
 
-
-int main() {
-
-    string input = getInput();
-    cout << endl << "# INPUT: " << input << endl;
-    Calc c(input);
-    c.printOPZ();
-    cout << endl << c.calculate();
-    return 0;
-}
-
-
 string getInput() {
     string res = "";
     char c = '\0';
@@ -242,3 +228,24 @@ string getInput() {
     }
     return res;
 }
+
+int main(int argc, char **argv) {
+    string input = "";
+    if (argc > 1) {
+        for (int i = 1; i < argc; i++) {
+            input += argv[i];
+        }
+        cout << input;
+        return 0;
+    }
+    else
+        input = getInput();
+    cout << endl << "# INPUT: " << input << endl;
+
+    Calc c(input);
+    c.printOPZ();
+    cout << endl << c.calculate();
+    return 0;
+}
+
+
