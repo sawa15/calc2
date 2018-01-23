@@ -229,14 +229,32 @@ string getInput() {
     return res;
 }
 
+string clean(string input) {
+    string res = "";
+    int i = 0;
+    while (i < input.size()) {
+        if (input[i] == 's' || input[i] == 'c' || input[i] == 'a') {
+            res += input[i];
+            i += 2;
+        }
+        else if (input[i] == '-' && (res[res.size() - 1] == '(' || res.size() == 0)) {
+            res += "0-";
+        }
+        else {
+            res += input[i];
+        }
+        i++;
+    }
+    return res;
+}
+
 int main(int argc, char **argv) {
     string input = "";
     if (argc > 1) {
         for (int i = 1; i < argc; i++) {
             input += argv[i];
         }
-        cout << input;
-        return 0;
+        input = clean(input);
     }
     else
         input = getInput();
@@ -247,5 +265,7 @@ int main(int argc, char **argv) {
     cout << endl << c.calculate();
     return 0;
 }
-
+/*
+ *
+ */
 
