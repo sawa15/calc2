@@ -45,6 +45,7 @@ public:
         for (int i = 0; i < combo.size(); i++) {
             if (combo[i] == 0) {
 
+                /*
                 switch (chars[j]) { // самому стыдно за то что дальше, но ничего с этим поделать не смог, не бей
                     case '+':
                         a = localStack.top();
@@ -105,6 +106,53 @@ public:
                         cout << endl << "s: sin(" << a << ") = " << sin(a);
                         break;
 
+                } */
+
+                if (isOp(chars[j])) {
+                    a = localStack.top();
+                    localStack.pop();
+                    b = localStack.top();
+                    localStack.pop();
+                    switch (chars[j]){
+                        case '+':
+                            localStack.push(b + a);
+                            cout << endl << "+: " << b << " + " << a << " = " << b + a;
+                            break;
+                        case '-':
+                            localStack.push(b - a);
+                            cout << endl << "-: " << b << " - " << a << " = " << b - a;
+                            break;
+                        case '*':
+                            localStack.push(b * a);
+                            cout << endl << "*: " << b << " * " << a << " = " << b * a;
+                            break;
+                        case '/':
+                            localStack.push(b / a);
+                            cout << endl << "/: " << b << " / " << a << " = " << b / a;
+                            break;
+                        case '^':
+                            localStack.push(pow(b, a));
+                            cout << endl << "^: " << b << " ^ " << a << " = " << pow(b, a);
+                            break;
+                    }
+                }
+                else if (isFunc(chars[j])) {
+                    a = localStack.top();
+                    localStack.pop();
+                    switch (chars[j]){
+                        case 'a':
+                            localStack.push(abs(a));
+                            cout << endl << "a: abs(" << a << ") = " << abs(a);
+                            break;
+                        case 'c':
+                            localStack.push(cos(a));
+                            cout << endl << "c: cos(" << a << ") = " << cos(a);
+                            break;
+                        case 's':
+                            localStack.push(sin(a));
+                            cout << endl << "s: sin(" << a << ") = " << sin(a);
+                            break;
+                    }
                 }
                 j++;
             }
@@ -117,6 +165,15 @@ public:
     }
 
 private:
+
+    bool isOp (char c) {
+        return (c == '+' || c == '-' || c == '*' || c == '/' || c == '^');
+    }
+
+    bool isFunc (char c) {
+        return (c == 's' || c == 'c' || c == 'a');
+    }
+
     void evaluate() {
         stack<char> *stack1 = new stack<char>;
         int i = 0;
